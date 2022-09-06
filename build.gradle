@@ -281,6 +281,13 @@ if (System.env.TRAVIS == 'true') {
   }
 }
 
+task buildClasspath {
+    doLast {
+        println "Main classpath = ${sourceSets.main.runtimeClasspath.asPath}";
+        new File(System.getProperty("user.dir"), "classpath.info").text = sourceSets.main.runtimeClasspath.asPath;
+    }
+}
+
 task copyRuntimeLibs(type: Copy) {
     into "lib"
     from configurations.testRuntime 
